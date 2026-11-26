@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FBF7F0">
+  <meta name="description" content="Vitrina crea páginas web profesionales y adaptadas a cada negocio en Perú.">
+  <title>Vitrina — Páginas web para negocios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,700;10..48,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FBF7F0;
+      --ink: #1B1A17;
+      --gray: #5E5A52;
+      --line: #E4DCCB;
+      --terra: #C23B1F;
+      --teal: #0F5C58;
+      --white: #FFFFFF;
+      --radius: 24px;
+      --shadow: 0 18px 50px rgba(27, 26, 23, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "DM Sans", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+
+    .header {
+      height: 92px;
+      display: flex;
+      align-items: center;
+      background: rgba(251, 247, 240, 0.92);
+      border-bottom: 1px solid transparent;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; }
+    .brand-name {
+      font-family: "Bricolage Grotesque", Arial, sans-serif;
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .brand-dot { color: var(--terra); }
+
+    .button {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 24px;
+      border: 1px solid var(--terra);
+      border-radius: 999px;
+      background: var(--terra);
+      color: var(--white);
+      font-weight: 700;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(194, 59, 31, .18); }
+    .button:focus-visible, a:focus-visible { outline: 3px solid rgba(15, 92, 88, .35); outline-offset: 3px; }
+    .button.secondary { border-color: var(--line); background: var(--white); color: var(--ink); }
+
+    .hero { padding: 74px 0 86px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1fr .85fr; gap: 60px; align-items: center; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .65);
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+    }
+    h1, h2, h3 { font-family: "Bricolage Grotesque", Arial, sans-serif; margin-top: 0; }
+    h1 {
+      max-width: 680px;
+      margin: 24px 0 20px;
+      font-size: clamp(48px, 7vw, 78px);
+      line-height: .98;
+      letter-spacing: -3.5px;
+    }
+    h1 span { color: var(--terra); }
+    .hero-copy { max-width: 580px; color: var(--gray); font-size: 19px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+    .browser {
+      width: 100%;
+      max-width: 470px;
+      margin-left: auto;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      transform: rotate(1.5deg);
+    }
+    .browser-bar { height: 38px; display: flex; align-items: center; gap: 6px; padding: 0 8px; }
+    .browser-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+    .mock-site { overflow: hidden; border-radius: 18px; background: #EEE6D8; }
+    .mock-nav { height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; background: #FFFDF8; }
+    .mock-logo { width: 72px; height: 9px; border-radius: 10px; background: var(--ink); }
+    .mock-menu { display: flex; gap: 5px; }
+    .mock-menu i { width: 26px; height: 5px; border-radius: 10px; background: var(--line); }
+    .mock-main { display: grid; grid-template-columns: 1.15fr .85fr; min-height: 310px; }
+    .mock-copy { display: flex; flex-direction: column; justify-content: center; padding: 28px 18px 28px 28px; }
+    .mock-kicker { width: 90px; height: 7px; border-radius: 10px; background: var(--terra); }
+    .mock-title { margin: 16px 0 10px; width: 190px; height: 58px; border-radius: 8px; background: var(--ink); }
+    .mock-text { width: 150px; height: 38px; border-radius: 6px; background: rgba(94, 90, 82, .22); }
+    .mock-button { width: 92px; height: 28px; margin-top: 16px; border-radius: 20px; background: var(--terra); }
+    .mock-art { position: relative; margin: 24px 20px 24px 0; border-radius: 18px; background: var(--teal); }
+    .mock-art::before { content: ""; position: absolute; width: 90px; height: 135px; right: 20px; bottom: 0; border-radius: 48px 48px 8px 8px; background: #F4C95D; }
+    .mock-art::after { content: ""; position: absolute; width: 58px; height: 58px; right: 36px; top: 36px; border-radius: 50%; background: var(--cream); }
+
+    section { scroll-margin-top: 100px; }
+    .section { padding: 86px 0; }
+    .section-heading { max-width: 680px; margin-bottom: 38px; }
+    .section-heading h2 { margin: 12px 0 14px; font-size: clamp(38px, 5vw, 58px); line-height: 1.02; letter-spacing: -2px; }
+    .section-heading p { max-width: 610px; margin: 0; color: var(--gray); font-size: 18px; }
+
+    .benefits { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(255,255,255,.35); }
+    .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .benefit-card { padding: 30px; }
+    .icon-box { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; background: #F3EDE1; color: var(--terra); }
+    .benefit-card h3 { margin: 22px 0 8px; font-size: 21px; }
+    .benefit-card p { margin: 0; color: var(--gray); }
+
+    .examples-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .example-card { overflow: hidden; }
+    .example-preview { height: 210px; display: grid; place-items: center; border-bottom: 1px solid var(--line); }
+    .preview-restaurant { background: #EFDDBA; }
+    .preview-services { background: #D9E5DE; }
+    .preview-store { background: #E9D7CF; }
+    .mini-page { width: 72%; height: 150px; padding: 14px; border-radius: 10px 10px 0 0; background: var(--white); box-shadow: 0 12px 30px rgba(27,26,23,.12); align-self: end; }
+    .mini-page .line { height: 7px; margin: 8px 0; border-radius: 10px; background: var(--line); }
+    .mini-page .line.dark { width: 54%; height: 14px; background: var(--ink); }
+    .mini-page .line.accent { width: 38%; background: var(--terra); }
+    .mini-page .blocks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 12px; }
+    .mini-page .blocks i { height: 45px; border-radius: 6px; background: #EEE8DB; }
+    .example-body { padding: 22px 24px 24px; }
+    .example-body h3 { margin: 0 0 5px; font-size: 21px; }
+    .example-body p { margin: 0; color: var(--gray); }
+
+    .process { background: var(--teal); color: var(--white); }
+    .process .section-heading p { color: rgba(255,255,255,.78); }
+    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .step { min-height: 210px; padding: 28px; border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius); }
+    .step-number { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: var(--white); color: var(--teal); font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; }
+    .step h3 { margin: 32px 0 7px; font-size: 21px; }
+    .step p { margin: 0; color: rgba(255,255,255,.78); }
+
+    .cta { padding: 86px 0; }
+    .cta-box { display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; padding: 42px 48px; border: 1px solid var(--line); border-radius: 32px; background: var(--white); box-shadow: var(--shadow); }
+    .cta h2 { margin: 0 0 8px; font-size: clamp(36px, 5vw, 52px); line-height: 1; letter-spacing: -2px; }
+    .cta p { margin: 0; color: var(--gray); }
+
+    .footer { border-top: 1px solid var(--line); padding: 36px 0; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .social-placeholder { color: var(--gray); font-size: 14px; }
+    .footer-copy { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--gray); font-size: 13px; }
+
+    .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .plan-card { display: flex; flex-direction: column; padding: 30px; }
+    .plan-card.featured { border: 2px solid var(--terra); box-shadow: var(--shadow); }
+    .plan-name { margin: 0 0 8px; color: var(--teal); font-size: 14px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+    .plan-price { margin: 0 0 18px; font-family: "Bricolage Grotesque", sans-serif; font-size: 42px; line-height: 1; letter-spacing: -2px; }
+    .plan-price small { color: var(--gray); font-family: "DM Sans", sans-serif; font-size: 15px; letter-spacing: 0; }
+    .plan-list { min-height: 138px; margin: 0 0 24px; padding: 0; list-style: none; color: var(--gray); }
+    .plan-list li { position: relative; margin: 9px 0; padding-left: 21px; }
+    .plan-list li::before { content: ""; position: absolute; left: 0; top: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--terra); }
+    .plan-card .button { margin-top: auto; }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 54px; }
+      .browser { max-width: 560px; margin: 10px auto 0; }
+      .benefit-grid, .examples-grid, .process-grid, .plans-grid { grid-template-columns: 1fr 1fr; }
+      .benefit-card:last-child, .example-card:last-child, .step:last-child { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 28px, 1120px); }
+      .header { height: 76px; }
+      .brand-logo { width: 42px; height: 42px; }
+      .brand-name { font-size: 21px; }
+      .header .button { min-height: 46px; padding-inline: 16px; font-size: 14px; }
+      .hero { padding: 38px 0 58px; }
+      h1 { margin-top: 18px; font-size: clamp(43px, 14vw, 62px); letter-spacing: -2.5px; }
+      .hero-copy { font-size: 17px; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .button { width: 100%; }
+      .browser { transform: none; }
+      .mock-main { min-height: 260px; }
+      .mock-copy { padding: 20px 12px 20px 18px; }
+      .mock-title { width: 145px; }
+      .mock-art { margin: 16px 12px 16px 0; }
+      .mock-art::before { width: 70px; height: 110px; right: 10px; }
+      .mock-art::after { width: 48px; height: 48px; right: 21px; }
+      .section, .cta { padding: 62px 0; }
+      .section-heading h2 { font-size: 40px; }
+      .benefit-grid, .examples-grid, .process-grid, .plans-grid { grid-template-columns: 1fr; }
+      .benefit-card:last-child, .example-card:last-child, .step:last-child { grid-column: auto; }
+      .cta-box { grid-template-columns: 1fr; padding: 32px 24px; }
+      .cta-box .button { width: 100%; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .button { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Vitrina, inicio">
+        <svg class="brand-logo" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <rect width="48" height="48" rx="12" fill="#C23B1F"/>
+          <path d="M10 17.5H38V23C38 25.2 36.2 27 34 27C31.8 27 30 25.2 30 23C30 25.2 28.2 27 26 27C23.8 27 22 25.2 22 23C22 25.2 20.2 27 18 27C15.8 27 14 25.2 14 23C14 25.2 12.2 27 10 27V17.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+          <rect x="10.5" y="27.5" width="27" height="10.5" rx="1.5" stroke="white" stroke-width="2"/>
+          <path d="M24 28V37" stroke="white" stroke-width="2"/>
+        </svg>
+        <span class="brand-name">Vitrina<span class="brand-dot">.</span></span>
+      </a>
+      <a class="button" href="https://wa.me/51947577911" target="_blank" rel="noopener noreferrer">Quiero mi página</a>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">PÁGINAS WEB PARA NEGOCIOS</span>
+          <h1>Tu negocio, <span>abierto en internet.</span></h1>
+          <p class="hero-copy">Creamos páginas web claras y profesionales, adaptadas a lo que hace tu negocio y a las necesidades de tus clientes.</p>
+          <div class="hero-actions">
+            <a class="button" href="https://wa.me/51947577911" target="_blank" rel="noopener noreferrer">Hablemos por WhatsApp</a>
+            <a class="button secondary" href="#como-funciona">Ver cómo funciona</a>
+          </div>
+        </div>
+
+        <div class="browser" aria-label="Ejemplo de página web creada por Vitrina">
+          <div class="browser-bar"><i class="browser-dot"></i><i class="browser-dot"></i><i class="browser-dot"></i></div>
+          <div class="mock-site">
+            <div class="mock-nav"><div class="mock-logo"></div><div class="mock-menu"><i></i><i></i><i></i></div></div>
+            <div class="mock-main">
+              <div class="mock-copy"><div class="mock-kicker"></div><div class="mock-title"></div><div class="mock-text"></div><div class="mock-button"></div></div>
+              <div class="mock-art"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section benefits" id="beneficios">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">HECHA PARA TU NEGOCIO</span>
+          <h2>Una página útil, no solo bonita.</h2>
+          <p>Diseñamos cada sitio pensando en cómo tus clientes encuentran, conocen y eligen tu negocio.</p>
+        </div>
+        <div class="benefit-grid">
+          <article class="card benefit-card">
+            <div class="icon-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M8 15V9M12 15V7M16 15V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Adaptada a ti</h3>
+            <p>No usamos plantillas iguales para todos. La estructura y los contenidos nacen de tu negocio.</p>
+          </article>
+          <article class="card benefit-card">
+            <div class="icon-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="7" y="2.5" width="10" height="19" rx="2" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5H13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Lista para celular</h3>
+            <p>Tu página se ve clara en móviles, tablets y computadoras, con botones fáciles de usar.</p>
+          </article>
+          <article class="card benefit-card">
+            <div class="icon-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 13H20M12 4V20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <h3>Fácil de encontrar</h3>
+            <p>Preparamos una base clara y accesible para que más personas puedan conocer tu negocio en internet.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ejemplos">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">IDEAS SEGÚN TU NEGOCIO</span>
+          <h2>Diseños con propósito.</h2>
+          <p>Cada página puede incluir las herramientas que realmente necesita tu actividad.</p>
+        </div>
+        <div class="examples-grid">
+          <article class="card example-card">
+            <div class="example-preview preview-restaurant">
+              <div class="mini-page"><div class="line accent"></div><div class="line dark"></div><div class="blocks"><i></i><i></i><i></i></div></div>
+            </div>
+            <div class="example-body"><h3>Restaurantes</h3><p>Carta digital, ubicación, horarios y pedidos por WhatsApp.</p></div>
+          </article>
+          <article class="card example-card">
+            <div class="example-preview preview-services">
+              <div class="mini-page"><div class="line accent"></div><div class="line dark"></div><div class="blocks"><i></i><i></i><i></i></div></div>
+            </div>
+            <div class="example-body"><h3>Profesionales y servicios</h3><p>Presentación, beneficios, testimonios y contacto directo.</p></div>
+          </article>
+          <article class="card example-card">
+            <div class="example-preview preview-store">
+              <div class="mini-page"><div class="line accent"></div><div class="line dark"></div><div class="blocks"><i></i><i></i><i></i></div></div>
+            </div>
+            <div class="example-body"><h3>Negocios y tiendas</h3><p>Catálogo, promociones, zonas de atención y ventas.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process" id="como-funciona">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow" style="background: transparent; border-color: rgba(255,255,255,.25); color: white;">PASO A PASO</span>
+          <h2>Así damos vida a tu página.</h2>
+          <p>Un proceso sencillo, cercano y enfocado en resolver lo que necesitas.</p>
+        </div>
+        <div class="process-grid">
+          <article class="step"><span class="step-number">1</span><h3>Conversamos</h3><p>Nos cuentas qué haces, a quién llegas y qué debe lograr tu página.</p></article>
+          <article class="step"><span class="step-number">2</span><h3>Diseñamos</h3><p>Organizamos el contenido y creamos una propuesta visual adaptada a tu marca.</p></article>
+          <article class="step"><span class="step-number">3</span><h3>Publicamos</h3><p>Revisamos contigo, ajustamos los detalles y dejamos tu página lista para el mundo.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <div><h2>Tu próximo cliente puede encontrarte hoy.</h2><p>Cuéntanos qué tienes en mente y hagamos realidad tu página web.</p></div>
+          <a class="button" href="https://wa.me/51947577911" target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="planes">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">PLANES Y PRECIOS</span>
+          <h2>Una página para cada etapa.</h2>
+          <p>Elige el punto de partida que mejor se adapte a tu negocio. Podemos ajustarlo según lo que necesites.</p>
+        </div>
+        <div class="plans-grid">
+          <article class="card plan-card">
+            <p class="plan-name">Presencia</p>
+            <p class="plan-price">S/ 250 <small>desde</small></p>
+            <ul class="plan-list">
+              <li>Página de una sección</li>
+              <li>Diseño adaptable al celular</li>
+              <li>Información y contacto</li>
+              <li>Botón directo a WhatsApp</li>
+            </ul>
+            <a class="button secondary" href="https://wa.me/51947577911" target="_blank" rel="noopener noreferrer">Consultar plan</a>
+          </article>
+          <article class="card plan-card featured">
+            <p class="plan-name">Negocio</p>
+            <p class="plan-price">S/ 400 <small>desde</small></p>
+            <ul class="plan-list">
+              <li>Página completa de varias secciones</li>
+              <li>Diseño personalizado</li>
+              <li>Catálogo o carta digital</li>
+              <li>Ubicación y redes sociales</li>
+              <li>Optimización para celular</li>
+            </ul>
+            <a class="button" href="https://wa.me/51947577911" target="_blank" rel="noopener noreferrer">Consultar plan</a>
+          </article>
+          <article class="card plan-card">
+            <p class="plan-name">Impulso</p>
+            <p class="plan-price">Personalizado</p>
+            <ul class="plan-list">
+              <li>Funciones especiales a medida</li>
+              <li>Reservas o pedidos</li>
+              <li>Secciones adicionales</li>
+              <li>Integraciones específicas</li>
+            </ul>
+            <a class="button secondary" href="https://wa.me/51947577911" target="_blank" rel="noopener noreferrer">Solicitar cotización</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-row">
+        <a class="brand" href="#inicio" aria-label="Volver al inicio">
+          <svg class="brand-logo" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect width="48" height="48" rx="12" fill="#C23B1F"/>
+            <path d="M10 17.5H38V23C38 25.2 36.2 27 34 27C31.8 27 30 25.2 30 23C30 25.2 28.2 27 26 27C23.8 27 22 25.2 22 23C22 25.2 20.2 27 18 27C15.8 27 14 25.2 14 23C14 25.2 12.2 27 10 27V17.5Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            <rect x="10.5" y="27.5" width="27" height="10.5" rx="1.5" stroke="white" stroke-width="2"/><path d="M24 28V37" stroke="white" stroke-width="2"/>
+          </svg>
+          <span class="brand-name">Vitrina<span class="brand-dot">.</span></span>
+        </a>
+        <div class="social-placeholder" aria-label="Espacio para redes sociales">Redes sociales — próximamente</div>
+      </div>
+      <div class="footer-copy">© 2026 Vitrina. Perú.</div>
+    </div>
+  </footer>
+</body>
+</html>
